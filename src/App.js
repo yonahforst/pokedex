@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+const App = () => {
+
+  const weatherData = {
+    temperature: 5,
+    location: "London",
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Logo data={weatherData} foo='bar'/>
+      <BestPokemon name='Squirle'/>
     </div>
   );
 }
+
+const calculateWeather = (weatherData) => {
+  return `The weather in ${weatherData.location} is ${weatherData.temperature}`
+}
+
+const Logo = (props) => {
+
+  return (
+    <header>
+      <h1>{calculateWeather(props.data)}</h1>
+      <img alt='pokemon' src='https://assets.pokemon.com/assets/cms2/img/pokedex/full/016.png'/>
+    </header>
+  )
+}
+
+const BestPokemon = (props) => <p>My favourite Pokemon is {props.name}</p>
 
 export default App;
