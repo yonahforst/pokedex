@@ -11,7 +11,6 @@ function App() {
   function logWhenClicked() {
     console.log("Clicked!");
   }
-
   return (
     <div>
       <Logo appName="Pokedex" handleClick={logWhenClicked} />

@@ -8,9 +8,12 @@ function CaughtPokemon(props) {
   }
 
   return (
-    <p>
-      Caught {totalCaught} Pokemon on {props.date}
-    </p>
+    <div>
+      <button onClick={incrementTotal}>Increment!</button>
+      <p>
+        Caught {totalCaught} Pokemon on {props.date}
+      </p>
+    </div>
   );
 }
 
