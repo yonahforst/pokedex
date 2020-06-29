@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const BestPokemon = (props) => {
   return (
@@ -14,15 +14,35 @@ const BestPokemon = (props) => {
 };
 
 const BestPokemonFetcher = (props) => {
-  const [ bestPokemon, setBestPokemon ] = React.useState(null);
+  const [ bestPokemon, setBestPokemon ] = useState(null);
 
   React.useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon/1/')
+    setBestPokemon(null)
+    fetch(`https://pokeapi.co/api/v2/pokemon/${props.pokemonId}/`)
     .then(response => response.json())
     .then(data => setBestPokemon(data))
-  }, [])
+  }, [ props.pokemonId ])
 
-  return bestPokemon ? <BestPokemon pokemon={bestPokemon} /> : null
+  return bestPokemon ? <BestPokemon pokemon={bestPokemon} /> : "Loading..."
 };
 
-export default BestPokemonFetcher;
+function BestPokemonSelector() {
+  const [ pokemonId, setPokemonId ] = useState(null);
+
+  function handleBulbasaurClick() {
+    setPokemonId('1');
+  }
+  function handleCharmanderClick() {
+    setPokemonId('4');
+  }
+
+  return (
+    <div>
+      <button onClick={handleBulbasaurClick}>Fetch Bulbasaur</button>
+      <button onClick={handleCharmanderClick}>Fetch Charmander</button>
+      {pokemonId ? <BestPokemonFetcher pokemonId={pokemonId} /> : null}
+    </div>
+  );
+}
+
+export default BestPokemonSelector;
